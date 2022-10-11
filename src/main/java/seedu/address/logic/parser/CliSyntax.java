@@ -7,6 +7,7 @@ public class CliSyntax {
 
     /* Prefix definitions (Person) */
     public static final Prefix PREFIX_PERSON_ID = new Prefix("pid/");
+    public static final Prefix PREFIX_PERSON_INDEX = new Prefix("pi/");
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
@@ -15,6 +16,7 @@ public class CliSyntax {
 
     /* Prefix definitions (Internship) */
     public static final Prefix PREFIX_INTERNSHIP_ID = new Prefix("iid/");
+    public static final Prefix PREFIX_INTERNSHIP_INDEX = new Prefix("ii/");
     public static final Prefix PREFIX_COMPANY_NAME = new Prefix("n/");
     public static final Prefix PREFIX_INTERNSHIP_ROLE = new Prefix("r/");
     public static final Prefix PREFIX_INTERNSHIP_STATUS = new Prefix("s/");
