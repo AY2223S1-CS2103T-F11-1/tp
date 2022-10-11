@@ -42,6 +42,7 @@ public class LinkCommand extends Command {
     private final Index internshipIndex;
 
     /*
+    Not sure if LinkCommand(Person, Internship) is needed, hence commenting this for now
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
@@ -52,9 +53,8 @@ public class LinkCommand extends Command {
      */
 
     /**
-     * Creates an AddCommand to add a {@code Person} with the specified
-     * {@code name}, {@code phone}, {@code email}, {@code address},
-     * {@code internshipId}, and {@code tags}.
+     * Creates an LinkCommand to link a {@code Person} and an {@code Internship}
+     * based on the given {@code personIndex} and {@code internshipIndex}
      */
     public LinkCommand(Index personIndex, Index internshipIndex) {
         this.personIndex = personIndex;
