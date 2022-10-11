@@ -41,6 +41,24 @@ public class Internship {
         this.interviewDate = interviewDate;
     }
 
+    /**
+     * Returns a new Internship with updated personId.
+     * Is only called by edit and link commands.
+     *
+     * @param newId of Person to link to the Internship.
+     * @return the new Internship.
+     */
+    public Internship updateContactPersonId(PersonId newId) {
+        return new Internship(
+                this.internshipId,
+                this.companyName,
+                this.internshipRole,
+                this.internshipStatus,
+                newId,
+                this.interviewDate
+        );
+    }
+
     public InternshipId getInternshipId() {
         return internshipId;
     }

@@ -66,6 +66,24 @@ public class Person {
     }
 
     /**
+     * Returns a new Person with updated internshipId.
+     * Is only called by edit and link commands.
+     *
+     * @param newId of Internship to link to the Person.
+     * @return the new Person.
+     */
+    public Person updateInternshipId(InternshipId newId) {
+        return new Person(
+                this.personId,
+                this.name,
+                this.phone,
+                this.email,
+                newId,
+                this.tags
+        );
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
