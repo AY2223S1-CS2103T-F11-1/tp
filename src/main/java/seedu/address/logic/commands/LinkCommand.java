@@ -13,9 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.internship.Internship;
-import seedu.address.model.internship.InternshipId;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonId;
 
 /**
  * Links a Person and an Internship.
@@ -81,24 +79,21 @@ public class LinkCommand extends Command {
         Person personToLink = lastShownPersonList.get(personIndex.getZeroBased());
         Internship internshipToLink = lastShownInternshipList.get(internshipIndex.getZeroBased());
 
-        PersonId nextPersonId = new PersonId(model.getNextPersonId());
-        InternshipId nextInternshipId = new InternshipId(model.getNextInternshipId());
-
         Person linkedPerson = new Person(
-                nextPersonId,
+                personToLink.getPersonId(),
                 personToLink.getName(),
                 personToLink.getPhone(),
                 personToLink.getEmail(),
-                nextInternshipId,
+                internshipToLink.getInternshipId(),
                 personToLink.getTags()
         );
 
         Internship linkedInternship = new Internship(
-                nextInternshipId,
+                internshipToLink.getInternshipId(),
                 internshipToLink.getCompanyName(),
                 internshipToLink.getInternshipRole(),
                 internshipToLink.getInternshipStatus(),
-                nextPersonId,
+                personToLink.getPersonId(),
                 internshipToLink.getInterviewDate()
         );
 
