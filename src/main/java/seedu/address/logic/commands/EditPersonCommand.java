@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINK_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -42,8 +43,7 @@ public class EditPersonCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            //    PREFIX_LINK_INDEX
-            + "[" + "l/" + "INTERNSHIP INDEX]"
+            + "[" + PREFIX_LINK_INDEX + "INTERNSHIP INDEX]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -92,33 +92,22 @@ public class EditPersonCommand extends Command {
         return lastShownInternshipList.get(linkIndex.getZeroBased());
     }
 
-    /**
-     * Updates an Internship with a given PersonId.
-     */
-    private void linkPersonToTargetInternship(Model model, Internship internshipToEdit, PersonId id) {
-        Internship editedTargetInternship = internshipToEdit.updateContactPersonId(id);
-        model.setInternship(internshipToEdit, editedTargetInternship);
-    }
-
-    /**
-     * Handles the case when internshipId of the Person is updated.
-     *
-     * @throws CommandException when index is out of bounds.
-     */
-    private CommandResult executeWithLinkingToInternship(
-            Model model,
-            Index linkIndex,
-            Person personToEdit,
-            Person editedPersonBeforeLinking) throws CommandException {
-        Internship internshipToEdit = findTargetInternshipFromLinkIndex(model, linkIndex);
+    private CommandResult executeWithLinkingHelper(Model model, Person personToEdit, Person editedPersonBeforeLinking,
+            Optional<Index> linkIndex) throws CommandException {
+        Internship internshipToEdit = findTargetInternshipFromLinkIndex(model, linkIndex.get());
         requireNonNull(internshipToEdit);
         InternshipId targetInternshipId = internshipToEdit.getInternshipId();
 
-        linkPersonToTargetInternship(model, internshipToEdit, personToEdit.getPersonId());
-
         Person editedPersonAfterLinking = editedPersonBeforeLinking.updateInternshipId(targetInternshipId);
+        Internship editedTargetInternship = internshipToEdit.updateContactPersonId(personToEdit.getPersonId());
 
+        if (!personToEdit.isSamePerson(editedPersonAfterLinking) && model.hasPerson(editedPersonAfterLinking)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        // setPerson() before setInternship() in case person's Name is changed
         model.setPerson(personToEdit, editedPersonAfterLinking);
+        model.setInternship(internshipToEdit, editedTargetInternship);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredInternshipList(PREDICATE_SHOW_ALL_INTERNSHIPS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPersonAfterLinking));
@@ -136,13 +125,9 @@ public class EditPersonCommand extends Command {
         Person personToEdit = lastShownPersonList.get(index.getZeroBased());
         Person editedPersonBeforeLinking = createEditedPerson(personToEdit, editPersonDescriptor);
 
-
-        if (editPersonDescriptor.getLinkIndex().isPresent()) {
-            return executeWithLinkingToInternship(
-                    model,
-                    editPersonDescriptor.getLinkIndex().get(),
-                    personToEdit,
-                    editedPersonBeforeLinking);
+        Optional<Index> linkIndex = editPersonDescriptor.getLinkIndex();
+        if (linkIndex.isPresent()) {
+            return executeWithLinkingHelper(model, personToEdit, editedPersonBeforeLinking, linkIndex);
         }
 
         if (!personToEdit.isSamePerson(editedPersonBeforeLinking) && model.hasPerson(editedPersonBeforeLinking)) {
@@ -150,6 +135,7 @@ public class EditPersonCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPersonBeforeLinking);
+        // TODO: find linkedInternship by Id and update it to editedPerson
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPersonBeforeLinking));
     }
@@ -209,8 +195,7 @@ public class EditPersonCommand extends Command {
         private Index linkIndex;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {
-        }
+        public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
@@ -298,6 +283,7 @@ public class EditPersonCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getLinkIndex().equals(e.getLinkIndex())
                     && getTags().equals(e.getTags());
         }
     }

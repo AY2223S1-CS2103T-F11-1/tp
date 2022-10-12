@@ -61,7 +61,6 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_LINK_INDEX).isPresent()) {
-            System.out.println("PREFIX_LINK_INDEX DETECTED");
             editPersonDescriptor.setLinkIndex(ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LINK_INDEX).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);

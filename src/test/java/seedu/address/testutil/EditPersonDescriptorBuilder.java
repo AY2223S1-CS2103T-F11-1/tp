@@ -35,7 +35,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setLinkIndex(Index.fromZeroBased(person.getInternshipId().id));
+        descriptor.setLinkIndex(null);
         descriptor.setTags(person.getTags());
     }
 
