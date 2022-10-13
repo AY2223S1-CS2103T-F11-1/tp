@@ -19,7 +19,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_INTERNSHIP_ROLE = new Prefix("r/");
     public static final Prefix PREFIX_INTERNSHIP_STATUS = new Prefix("s/");
     public static final Prefix PREFIX_INTERVIEW_DATE = new Prefix("d/");
-    public static final Prefix PREFIX_LINK_INDEX = new Prefix("l/");
 
     /* Prefix definitions (Common) */
     public static final Prefix PREFIX_LINK_INDEX = new Prefix("l/");
