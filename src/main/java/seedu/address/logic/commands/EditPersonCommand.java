@@ -194,6 +194,7 @@ public class EditPersonCommand extends Command {
         private Email email;
         private Index linkIndex;
         private Set<Tag> tags;
+        private Index linkIndex;
 
         public EditPersonDescriptor() {}
 
@@ -207,6 +208,7 @@ public class EditPersonCommand extends Command {
             setEmail(toCopy.email);
             setLinkIndex(toCopy.linkIndex);
             setTags(toCopy.tags);
+            setLinkIndex(toCopy.linkIndex);
         }
 
         /**
@@ -263,6 +265,14 @@ public class EditPersonCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setLinkIndex(Index linkIndex) {
+            this.linkIndex = linkIndex;
+        }
+
+        public Optional<Index> getLinkIndex() {
+            return Optional.ofNullable(linkIndex);
         }
 
         @Override
