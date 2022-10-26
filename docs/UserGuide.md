@@ -279,6 +279,6 @@ If your changes to the data file makes its format invalid, InterNUS will discard
 | **Edit internship**   | `edit -i INDEX [c/COMPANY] [r/ROLE] [s/STATUS] [d/INTERVIEW_DATE]`<br> e.g.,`edit -i 2 s/REJECTED`, `edit -i 3 d/2023-01-01 13:30`                 |
 | **Find person**       | `findp KEYWORD` <br> e.g., `findp James`                                                                                                           |
 | **Find internship**   | `findi KEYWORD` <br> e.g., `findi Google`                                                                                                          |
-| **List persons**      | `listp`                                                                                                                                            |
+| **List persons**      | `list -p`                                                                                                                                          |
 | **List internships**  | `listi`                                                                                                                                            |
 | **Help**              | `help`                                                                                                                                             |
