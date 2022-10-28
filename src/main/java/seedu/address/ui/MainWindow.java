@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import static javafx.application.Application.setUserAgentStylesheet;
 
-import java.net.URL;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -14,6 +13,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -28,6 +28,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String LIGHT_THEME = "LightTheme.css";
+    private static final String DARK_THEME = "DarkTheme.css";
+    private static final String EXTENSIONS = "Extensions.css";
+
+    private static String currentTheme = "LightTheme.css";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -59,15 +64,6 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private URL lightTheme;
-
-    @FXML
-    private URL darkTheme;
-
-    @FXML
-    private URL extensions;
-
-    @FXML
     private Scene mainScene;
 
     /**
@@ -81,7 +77,7 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // Configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
+        loadGuiSettings(logic.getGuiSettings());
 
         setAccelerators();
 
@@ -161,13 +157,15 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Sets the default size based on {@code guiSettings}.
      */
-    private void setWindowDefaultSize(GuiSettings guiSettings) {
+    private void loadGuiSettings(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+
+        updateTheme(guiSettings.getColorTheme());
     }
 
     /**
@@ -177,6 +175,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
+            helpWindow.updateTheme(currentTheme, EXTENSIONS);
         } else {
             helpWindow.focus();
         }
@@ -192,7 +191,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), currentTheme);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -200,20 +199,30 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleLightThemeSwitch() {
-        mainScene.getStylesheets().clear();
-        setUserAgentStylesheet(null);
-
-        mainScene.getStylesheets().add("file:" + lightTheme.getPath());
-        mainScene.getStylesheets().add("file:" + extensions.getPath());
+        updateTheme(LIGHT_THEME);
     }
 
     @FXML
     private void handleDarkThemeSwitch() {
+        updateTheme(DARK_THEME);
+    }
+
+    private void updateTheme(String theme) {
+        if (theme == null || theme.isBlank()) {
+            return;
+        }
+
+        currentTheme = theme;
+
         mainScene.getStylesheets().clear();
         setUserAgentStylesheet(null);
 
-        mainScene.getStylesheets().add("file:" + darkTheme.getPath());
-        mainScene.getStylesheets().add("file:" + extensions.getPath());
+        mainScene.getStylesheets().add(MainApp.class.getResource("/view/" + currentTheme).toExternalForm());
+        mainScene.getStylesheets().add(MainApp.class.getResource("/view/" + EXTENSIONS).toExternalForm());
+
+        if (helpWindow != null && helpWindow.isShowing()) {
+            helpWindow.updateTheme(currentTheme, EXTENSIONS);
+        }
     }
 
     public PersonListPanel getPersonListPanel() {

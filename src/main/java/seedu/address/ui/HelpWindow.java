@@ -1,15 +1,18 @@
 package seedu.address.ui;
 
+import static javafx.application.Application.setUserAgentStylesheet;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.AppUtil;
 import seedu.address.logic.commands.AddInternshipCommand;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -26,6 +29,7 @@ import seedu.address.logic.commands.ListInternshipCommand;
 import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.commands.SortInternshipCommand;
 import seedu.address.logic.commands.SortPersonCommand;
+import seedu.address.logic.commands.UnlinkCommand;
 
 /**
  * Controller for a help page
@@ -39,22 +43,23 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
 
     private static final String COMMAND_SUMMARY = "SUMMARY OF COMMANDS:\n\n"
-            + HelpCommand.COMMAND_WORD + ": Opens this help window\n\n"
+            + HelpCommand.COMMAND_WORD + ": Opens this help window.\n\n"
             + AddPersonCommand.MESSAGE_USAGE + "\n\n"
             + AddInternshipCommand.MESSAGE_USAGE + "\n\n"
-            + ListPersonCommand.COMMAND_WORD + ": Lists all persons\n\n"
-            + ListInternshipCommand.COMMAND_WORD + ": Lists all internships\n\n"
+            + ListPersonCommand.COMMAND_WORD + ": Lists all persons.\n\n"
+            + ListInternshipCommand.COMMAND_WORD + ": Lists all internships.\n\n"
             + EditPersonCommand.MESSAGE_USAGE + "\n\n"
             + EditInternshipCommand.MESSAGE_USAGE + "\n\n"
             + LinkCommand.MESSAGE_USAGE + "\n\n"
+            + UnlinkCommand.MESSAGE_USAGE + "\n\n"
             + FindPersonCommand.MESSAGE_USAGE + "\n\n"
             + FindInternshipCommand.MESSAGE_USAGE + "\n\n"
             + DeletePersonCommand.MESSAGE_USAGE + "\n\n"
             + DeleteInternshipCommand.MESSAGE_USAGE + "\n\n"
             + SortPersonCommand.MESSAGE_USAGE + "\n\n"
             + SortInternshipCommand.MESSAGE_USAGE + "\n\n"
-            + ClearCommand.COMMAND_WORD + ": Clears all entries\n\n"
-            + ExitCommand.COMMAND_WORD + ": Exits the program";
+            + ClearCommand.COMMAND_WORD + ": Clears all entries.\n\n"
+            + ExitCommand.COMMAND_WORD + ": Exits the program.";
 
     @FXML
     private Button copyButton;
@@ -63,7 +68,10 @@ public class HelpWindow extends UiPart<Stage> {
     private Label helpMessage;
 
     @FXML
-    private TextArea commandSummaryDisplay;
+    private TextArea resultDisplay;
+
+    @FXML
+    private Scene scene;
 
     /**
      * Creates a new HelpWindow.
@@ -74,7 +82,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
 
-        commandSummaryDisplay.setText(COMMAND_SUMMARY);
+        resultDisplay.setText(COMMAND_SUMMARY);
     }
 
     /**
@@ -130,13 +138,22 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the help window's color theme to match the MainWindow's.
+     */
+    public void updateTheme(String currentTheme, String extensions) {
+        scene.getStylesheets().clear();
+        setUserAgentStylesheet(null);
+
+        scene.getStylesheets().add(MainApp.class.getResource("/view/" + currentTheme).toExternalForm());
+        scene.getStylesheets().add(MainApp.class.getResource("/view/" + extensions).toExternalForm());
+
+    }
+
+    /**
      * Copies the URL to the user guide to the clipboard.
      */
     @FXML
     private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+        AppUtil.copy(USERGUIDE_URL);
     }
 }

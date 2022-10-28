@@ -98,7 +98,9 @@
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 4px;
+    -fx-border-insets: 4px;
+    -fx-background-insets: 4px;
     -fx-border-radius: 20px;
     -fx-border-width: 0px;
     -fx-background-radius: 20px;
@@ -118,7 +120,9 @@
 
 .list-cell:filled:selected #cardPane {
     -fx-border-color: -fx-dark-primary;
-    -fx-border-width: 1;
+    -fx-border-width: 3px;
+    -fx-border-radius: 23px;
+    -fx-border-insets: -3px;
 }
 
 .list-cell .label {
@@ -160,6 +164,10 @@
 
 .result-display .label {
     -fx-text-fill: black !important;
+}
+
+.result-display:focused .content {
+    -fx-border-width: 0;
 }
 
 .status-bar .label {
@@ -219,7 +227,7 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: transparent;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: -fx-dark-background-primary;
@@ -291,7 +299,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(-fx-dark-background-primary, 50%);
+    -fx-background-color: -fx-dark-default;
     -fx-background-insets: 3;
 }
 
@@ -363,4 +371,65 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#copyButton, #helpMessage {
+    -fx-text-fill: white;
+}
+
+#copyButton {
+    -fx-background-color: -fx-dark-default;
+    -fx-border-width: 0;
+    -fx-background-radius: 8;
+    -fx-border-insets: 0;
+    -fx-padding: 5 22 5 22;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+}
+
+#copyButton:focused {
+    -fx-border-insets: 0;
+}
+
+#copyButton:hover {
+    -fx-border-insets: 0;
+    -fx-background-color: -fx-focus-color;
+}
+
+#copyButton:armed {
+    -fx-border-insets: 0;
+    -fx-background-color: derive(-fx-focus-color, -20%);
+}
+
+#helpContainer, #helpMessageContainer {
+    -fx-background-color: derive(-fx-dark-background-primary, 20%);
+}
+
+.cell_copy_button {
+    -fx-background-color: -fx-dark-default;
+    -fx-border-width: 0;
+    -fx-background-radius: 8;
+    -fx-border-insets: 0;
+    -fx-padding: 2 8 2 8;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+    -fx-min-width: 50px;
+    -fx-max-width: 50px;
+    -fx-pref-width: 50px;
+}
+
+.cell_copy_button:focused {
+    -fx-border-insets: 0;
+    -fx-border-width: 0;
+}
+
+.cell_copy_button:hover {
+    -fx-border-insets: 0;
+    -fx-background-color: -fx-focus-color;
+}
+
+.cell_copy_button:armed {
+    -fx-border-insets: 0;
+    -fx-background-color: derive(-fx-focus-color, -20%);
 }

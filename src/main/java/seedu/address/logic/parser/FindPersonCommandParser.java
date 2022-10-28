@@ -34,7 +34,13 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
                         PREFIX_TAG,
                         PREFIX_COMPANY);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!ParserUtil.isAnyPrefixPresent(argMultimap,
+                PREFIX_NAME,
+                PREFIX_EMAIL,
+                PREFIX_PHONE,
+                PREFIX_TAG,
+                PREFIX_COMPANY)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
@@ -91,5 +97,4 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
                 Arrays.asList(tagKeywords),
                 Arrays.asList(companyKeywords)));
     }
-
 }

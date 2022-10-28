@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.AppUtil;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.person.PersonId;
 
@@ -13,7 +14,7 @@ import seedu.address.model.person.PersonId;
  */
 public class InternshipCard extends UiPart<Region> {
 
-    static final String NO_CONTACT_PERSON = "No contact person.";
+    static final String NO_CONTACT_PERSON = "No contact person";
     private static final String FXML = "InternshipListCard.fxml";
 
     /**
@@ -50,14 +51,26 @@ public class InternshipCard extends UiPart<Region> {
         super(FXML);
         this.internship = internship;
         id.setText(displayedIndex + ". ");
+
         name.setText(internship.getDisplayName());
+
         companyName.setText(internship.getCompanyName().fullName);
+
         role.setText(internship.getInternshipRole().roleName);
+
         String internshipStatus = internship.getInternshipStatus().toString();
+
         Label statusLabel = new Label(internshipStatus);
         statusLabel.getStyleClass().add(internshipStatus.toLowerCase());
         status.getChildren().add(statusLabel);
-        contactPerson.setText(NO_CONTACT_PERSON); // dummy value
+
+        if (internship.getContactPersonId() == null) {
+            contactPerson.setText(NO_CONTACT_PERSON);
+        } else {
+            contactPerson.setText(internship.getContactPersonId().toString());
+        }
+
+        interviewDate.setText(internship.getInterviewDate().toString());
     }
 
     public PersonId getContactPersonId() {
@@ -68,9 +81,32 @@ public class InternshipCard extends UiPart<Region> {
         if (contactPersonName == null) {
             contactPerson.setText(NO_CONTACT_PERSON);
         } else {
-            contactPerson.setText("Contact Person: " + contactPersonName);
+            contactPerson.setText(contactPersonName);
         }
-        interviewDate.setText("Interview on: " + internship.getInterviewDate().toString());
+    }
+
+    public void copyName() {
+        AppUtil.copy(name.getText());
+    }
+
+    public void copyCompanyName() {
+        AppUtil.copy(companyName.getText());
+    }
+
+    public void copyStatus() {
+        AppUtil.copy(internship.getInternshipStatus().toString());
+    }
+
+    public void copyRole() {
+        AppUtil.copy(role.getText());
+    }
+
+    public void copyContactPerson() {
+        AppUtil.copy(contactPerson.getText());
+    }
+
+    public void copyInterviewDate() {
+        AppUtil.copy(interviewDate.getText());
     }
 
     @Override

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.util.AppUtil;
 import seedu.address.model.internship.InternshipId;
 import seedu.address.model.person.Person;
 
@@ -52,17 +53,23 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
+
         name.setText(person.getName().fullName);
+
         phone.setText(person.getPhone().toString());
+
         email.setText(person.getEmail().toString());
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
         if (person.getInternshipId() == null) {
             internship.setText(NO_INTERNSHIP);
         } else {
-            internship.setText("Internship: " + person.getInternshipId().toString());
+            internship.setText(person.getInternshipId().toString());
         }
+
         company.setText(person.getCompany().toString());
     }
 
@@ -74,8 +81,40 @@ public class PersonCard extends UiPart<Region> {
         if (internshipName == null) {
             internship.setText(NO_INTERNSHIP);
         } else {
-            internship.setText("Internship: " + internshipName);
+            internship.setText(internshipName);
         }
+    }
+
+    public void copyName() {
+        AppUtil.copy(name.getText());
+    }
+
+    public void copyPhone() {
+        AppUtil.copy(phone.getText());
+    }
+
+    public void copyEmail() {
+        AppUtil.copy(email.getText());
+    }
+
+    /**
+     * Formats the Person's tags to a string then copies it to the system clipboard.
+     */
+    public void copyTags() {
+        StringBuilder result = new StringBuilder();
+        person.getTags().stream().forEach(t -> {
+            result.append(t.tagName);
+            result.append(", ");
+        });
+        AppUtil.copy(result.substring(0, result.length() - 2));
+    }
+
+    public void copyInternship() {
+        AppUtil.copy(internship.getText());
+    }
+
+    public void copyCompany() {
+        AppUtil.copy(company.getText());
     }
 
     @Override

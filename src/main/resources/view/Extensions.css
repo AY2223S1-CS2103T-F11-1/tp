@@ -1,10 +1,10 @@
 .root {
     -fx-dark-default: #383838;
-    -fx-dark-background-primary: #1d1d1d;
+    -fx-dark-background-primary: #121212;
     -fx-dark-primary: #3e7b91;
     -fx-light-default: #e0e0e0;
-    -fx-light-background-primary: #e8e8e8;
-    -fx-light-primary: #d3ccea;
+    -fx-light-background-primary: #ebebeb;
+    -fx-light-primary: #a7beda;
 }
 
 .error {

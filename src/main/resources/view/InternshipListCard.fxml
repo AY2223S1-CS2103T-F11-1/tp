@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -18,6 +19,9 @@
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
       <HBox spacing="5" alignment="CENTER_LEFT">
+        <padding>
+          <Insets right="10" top="2" bottom="2" />
+        </padding>
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
@@ -25,12 +29,53 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyName" text="Copy" />
       </HBox>
-      <FlowPane fx:id="status" />
-      <Label fx:id="companyName" styleClass="cell_small_label" text="\$companyName" />
-      <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
-      <Label fx:id="contactPerson" styleClass="cell_small_label" text="\$contactPerson" />
-      <Label fx:id="interviewDate" styleClass="cell_small_label" text="\$interviewDate" />
+      <HBox alignment="CENTER_LEFT">
+        <padding>
+          <Insets right="10" top="2" bottom="2" />
+        </padding>
+        <FlowPane fx:id="status" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyStatus" text="Copy" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <padding>
+          <Insets right="10" top="2" bottom="2" />
+        </padding>
+        <Label fx:id="companyName" styleClass="cell_small_label" text="\$companyName" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyCompanyName" text="Copy" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <padding>
+          <Insets right="10" top="2" bottom="2" />
+        </padding>
+        <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyRole" text="Copy" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <padding>
+          <Insets right="10" top="2" bottom="2" />
+        </padding>
+        <Label styleClass="cell_small_label" text="Contact Person:"
+               minWidth="95" maxWidth="95" prefWidth="95" />
+        <Label fx:id="contactPerson" styleClass="cell_small_label" text="\$contactPerson" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyContactPerson" text="Copy" />
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+        <padding>
+          <Insets right="10" top="2" bottom="2" />
+        </padding>
+        <Label styleClass="cell_small_label" text="Interview:"
+               minWidth="60" maxWidth="60" prefWidth="60" />
+        <Label fx:id="interviewDate" styleClass="cell_small_label" text="\$interviewDate" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyInterviewDate" text="Copy" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>

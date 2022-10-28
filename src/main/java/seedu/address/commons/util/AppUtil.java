@@ -3,6 +3,8 @@ package seedu.address.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import javafx.scene.image.Image;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import seedu.address.MainApp;
 
 /**
@@ -38,5 +40,19 @@ public class AppUtil {
         if (!condition) {
             throw new IllegalArgumentException(errorMessage);
         }
+    }
+
+    /**
+     * Copies a string to the system clipboard.
+     */
+    public static void copy(String stringToCopy) {
+        if (stringToCopy == null) {
+            return;
+        }
+
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent content = new ClipboardContent();
+        content.putString(stringToCopy);
+        clipboard.setContent(content);
     }
 }
