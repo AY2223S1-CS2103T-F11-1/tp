@@ -31,7 +31,6 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyName" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -39,7 +38,6 @@
         </padding>
         <FlowPane fx:id="tags" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyTags" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -47,7 +45,6 @@
         </padding>
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyPhone" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -55,7 +52,6 @@
         </padding>
         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyEmail" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -65,7 +61,6 @@
                minWidth="65" maxWidth="65" prefWidth="65" />
         <Label fx:id="internship" styleClass="cell_small_label" text="\$internship" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyInternship" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -73,7 +68,6 @@
         </padding>
         <Label fx:id="company" styleClass="cell_small_label" text="\$company" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyCompany" text="Copy" />
       </HBox>
     </VBox>
   </GridPane>

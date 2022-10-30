@@ -30,7 +30,6 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyName" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -38,7 +37,6 @@
         </padding>
         <FlowPane fx:id="status" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyStatus" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -46,7 +44,6 @@
         </padding>
         <Label fx:id="companyName" styleClass="cell_small_label" text="\$companyName" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyCompanyName" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -54,7 +51,6 @@
         </padding>
         <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyRole" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -64,7 +60,6 @@
                minWidth="95" maxWidth="95" prefWidth="95" />
         <Label fx:id="contactPerson" styleClass="cell_small_label" text="\$contactPerson" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyContactPerson" text="Copy" />
       </HBox>
       <HBox alignment="CENTER_LEFT">
         <padding>
@@ -74,7 +69,6 @@
                minWidth="60" maxWidth="60" prefWidth="60" />
         <Label fx:id="interviewDate" styleClass="cell_small_label" text="\$interviewDate" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button styleClass="cell_copy_button" mnemonicParsing="false" onAction="#copyInterviewDate" text="Copy" />
       </HBox>
     </VBox>
   </GridPane>

@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.commons.util.AppUtil;
 import seedu.address.model.internship.Internship;
 import seedu.address.model.person.PersonId;
 
@@ -83,30 +82,6 @@ public class InternshipCard extends UiPart<Region> {
         } else {
             contactPerson.setText(contactPersonName);
         }
-    }
-
-    public void copyName() {
-        AppUtil.copy(name.getText());
-    }
-
-    public void copyCompanyName() {
-        AppUtil.copy(companyName.getText());
-    }
-
-    public void copyStatus() {
-        AppUtil.copy(internship.getInternshipStatus().toString());
-    }
-
-    public void copyRole() {
-        AppUtil.copy(role.getText());
-    }
-
-    public void copyContactPerson() {
-        AppUtil.copy(contactPerson.getText());
-    }
-
-    public void copyInterviewDate() {
-        AppUtil.copy(interviewDate.getText());
     }
 
     @Override
