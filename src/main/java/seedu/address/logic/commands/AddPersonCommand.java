@@ -53,6 +53,7 @@ public class AddPersonCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in InterNUS";
+    public static final String MESSAGE_LINKED_INTERNSHIP = "Internship %2$s is already linked to Person %1$s";
 
     private final Name name;
     private final Phone phone;
@@ -101,7 +102,6 @@ public class AddPersonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // By default, use the internshipId field in the command
         InternshipId idToLink = internshipId;
         List<Internship> lastShownList = model.getFilteredInternshipList();
 
@@ -111,7 +111,12 @@ public class AddPersonCommand extends Command {
 
         if (linkIndex != null && linkIndex.getZeroBased() < lastShownList.size()) {
             Internship internship = lastShownList.get(linkIndex.getZeroBased());
-            if (internship.getContactPersonId() == null) {
+            if (internship.getContactPersonId() != null) {
+                throw new CommandException(String.format(
+                        MESSAGE_LINKED_INTERNSHIP,
+                        model.findPersonById(internship.getContactPersonId()).getName(),
+                        internship.getDisplayName()));
+            } else {
                 idToLink = internship.getInternshipId();
             }
         }
