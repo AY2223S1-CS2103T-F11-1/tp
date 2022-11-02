@@ -105,7 +105,7 @@ public class AddPersonCommand extends Command {
         InternshipId idToLink = internshipId;
         List<Internship> lastShownList = model.getFilteredInternshipList();
 
-        if (linkIndex == null || linkIndex.getZeroBased() >= lastShownList.size()) {
+        if (linkIndex != null && linkIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_INTERNSHIP_DISPLAYED_INDEX);
         }
 
